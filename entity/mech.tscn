@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dami4007oys0s"]
+
+[ext_resource type="Script" uid="uid://cn67gnrynypsw" path="res://entity/mech.gd" id="1_sesxp"]
+
+[node name="Mech" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_sesxp")
+metadata/_custom_type_script = "uid://wdpt3sbxsi8x"
