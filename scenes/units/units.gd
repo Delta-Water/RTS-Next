@@ -14,9 +14,9 @@ func _input(event):
 	pass
 
 ## 生成单位
-func spawn_unit(type: String, unit_position: Vector2) -> UnitBase:
+func spawn_unit(type: String, unit_position: Vector2) -> UnitBase1:
 	var scene: PackedScene = registry.get(type)
-	var node: UnitBase = scene.instantiate()
+	var node: UnitBase1 = scene.instantiate()
 	node.position = unit_position
 	add_child(node)
 	return node

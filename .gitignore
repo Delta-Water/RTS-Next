@@ -3,5 +3,5 @@
 /android/
 
 # MacOSX Special Files
-/.DS_Store
+**/.DS_Store
 __MACOSX/

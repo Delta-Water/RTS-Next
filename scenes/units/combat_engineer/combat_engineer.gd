@@ -1,2 +1,2 @@
 class_name CombatEngineer
-extends UnitBase
+extends UnitBase1
