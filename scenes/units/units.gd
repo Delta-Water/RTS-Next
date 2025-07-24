@@ -1,7 +1,10 @@
+class_name Units
 extends Node2D
 
-# 导出单位类型（以后最好通过代码实现加载到树）
-@export var combat_engineer: PackedScene
+## 单位仓库。用于注册单位用于动态生成。
+var registry: Dictionary[String, PackedScene] = {
+	"rts:combat_engineer" = preload("res://scenes/units/combat_engineer/combat_engineer.tscn"),
+}
 
 var selected_units: Array = []
 
@@ -10,10 +13,14 @@ func _input(event):
 	# 监听单位选择事件
 	pass
 
-# 生成单位
+## 生成单位
 # func spawn_unit(type: String, position: Vector2) -> UnitBase1:
-func spawn_unit(type: String, position: Vector2):
-	pass
+func spawn_unit(type: String, unit_position: Vector2) -> UnitBase1:
+	var scene: PackedScene = registry.get(type)
+	var node: UnitBase1 = scene.instantiate()
+	node.position = unit_position
+	add_child(node)
+	return node
 
 # 单位选择逻辑
 func _select_units():

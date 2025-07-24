@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://drhbi3wa87gsk"]
+[gd_scene load_steps=5 format=3 uid="uid://drhbi3wa87gsk"]
 
 [ext_resource type="PackedScene" uid="uid://be8f2x52mk3vy" path="res://scenes/maps/map.tscn" id="1_iuonh"]
+[ext_resource type="Script" uid="uid://b8c7yf2gfxafw" path="res://scenes/main/main.gd" id="1_l3cfh"]
 [ext_resource type="PackedScene" uid="uid://st7im2qo5jw1" path="res://scenes/units/units.tscn" id="2_k2fmo"]
 [ext_resource type="PackedScene" uid="uid://jxguohqwm0qf" path="res://scenes/units/combat_engineer/combat_engineer.tscn" id="3_k2fmo"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_l3cfh")
 
 [node name="Map" parent="." instance=ExtResource("1_iuonh")]
 
 [node name="Units" parent="." instance=ExtResource("2_k2fmo")]
+unique_name_in_owner = true
 
 [node name="CombatEngineer" parent="Units" instance=ExtResource("3_k2fmo")]
