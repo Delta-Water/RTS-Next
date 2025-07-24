@@ -18,6 +18,6 @@ func _physics_process(delta):
 		move_and_slide()
 
 # 设置移动路径
-func set_path(path: Array):
+func set_path(path: Array[Vector2]):
 	if movement_component:
 		movement_component.set_path(path)

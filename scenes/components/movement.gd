@@ -15,7 +15,7 @@ enum State { IDLE, ROTATING, MOVING }
 # 内部变量
 var current_state: State = State.IDLE
 var target_pos: Vector2 = Vector2.ZERO
-var path: Array = []
+var path: Array[Vector2] = []
 var rotate_tween: Tween
 var is_new_path: bool = false
 var unit: CharacterBody2D
@@ -26,7 +26,7 @@ func _ready():
 		push_error("MovementComponent must be a child of CharacterBody2D")
 
 # 设置移动路径
-func set_path(new_path: Array):
+func set_path(new_path: Array[Vector2]):
 	if rotate_tween:
 		rotate_tween.kill()
 		rotate_tween = null
