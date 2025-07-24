@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://jxguohqwm0qf"]
+
+[ext_resource type="PackedScene" uid="uid://bxi8caf42vkjq" path="res://scenes/components/unit_bases/unit_base_1/unit_base_1.tscn" id="1_bxk6l"]
+[ext_resource type="Script" uid="uid://dnppn1hcgnbwe" path="res://scenes/units/combat_engineer/combat_engineer.gd" id="2_x2l3i"]
+[ext_resource type="Texture2D" uid="uid://cc5tpbomfe73x" path="res://assets/_units/scout/base.png" id="3_heby1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_heby1"]
+
+[node name="CombatEngineer" instance=ExtResource("1_bxk6l")]
+script = ExtResource("2_x2l3i")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_heby1")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_heby1")
+
+[node name="NavigationAgent2D" parent="." index="2"]
+simplify_epsilon = 1.0
