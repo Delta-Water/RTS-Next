@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://jxguohqwm0qf"]
 
-[ext_resource type="PackedScene" uid="uid://bxi8caf42vkjq" path="res://scenes/units/unit_bases/unit_base_1/unit_base_1.tscn" id="1_bxk6l"]
+[ext_resource type="PackedScene" uid="uid://bxi8caf42vkjq" path="res://scenes/units/unit_bases/unit_base/unit_base.tscn" id="1_bxk6l"]
 [ext_resource type="Script" uid="uid://dnppn1hcgnbwe" path="res://scenes/units/combat_engineer/combat_engineer.gd" id="2_x2l3i"]
 
 [node name="CombatEngineer" instance=ExtResource("1_bxk6l")]

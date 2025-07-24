@@ -1,5 +1,5 @@
 # 单位基类
-class_name UnitBase1
+class_name UnitBase
 extends CharacterBody2D
 
 # 组件引用
