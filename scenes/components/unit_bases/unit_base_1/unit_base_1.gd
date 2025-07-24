@@ -12,11 +12,12 @@ var current_path_index: int = -1
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var can_move_while_rotating: bool = true
 
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 
-func _input(event):
+func _input(event: InputEvent):
 	if event.is_action_pressed("click"):
 		_interrupt_current_action()
 		current_path_index = -1
@@ -24,7 +25,7 @@ func _input(event):
 		# 状态将在 physics_process 中更新
 		current_state = State.IDLE
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	match current_state:
 		State.IDLE:
 			# 等待导航路径更新
@@ -35,30 +36,36 @@ func _physics_process(delta):
 				move_and_slide()
 		
 		State.ROTATING:
-			print("rotating ", velocity)
-			# 旋转前保持静止
-			velocity = Vector2.ZERO
-			move_and_slide()
+			if can_move_while_rotating:
+				_perform_move()
+			else:
+				print("rotating ", velocity)
+				# 旋转前保持静止
+				velocity = Vector2.ZERO
+				move_and_slide()
 		
 		State.MOVING:
-			print("moving ", velocity)
-			if navigation_agent.is_navigation_finished():
-				current_state = State.IDLE
-				return
-				
-			var next_path_pos = navigation_agent.get_next_path_position()
-			var new_velocity = global_position.direction_to(next_path_pos) * movement_speed
-			
-			if navigation_agent.avoidance_enabled:
-				navigation_agent.set_velocity(new_velocity)
-			else:
-				_on_velocity_computed(new_velocity)
-			
-			# 检查路径点变化
-			var new_index = navigation_agent.get_current_navigation_path_index()
-			if current_path_index != new_index:
-				current_path_index = new_index
-				_start_rotation(navigation_agent.get_next_path_position())
+			_perform_move()
+
+func _perform_move():
+	print("moving ", velocity)
+	if navigation_agent.is_navigation_finished():
+		current_state = State.IDLE
+		return
+		
+	var next_path_pos = navigation_agent.get_next_path_position()
+	var new_velocity = global_position.direction_to(next_path_pos) * movement_speed
+	
+	if navigation_agent.avoidance_enabled:
+		navigation_agent.set_velocity(new_velocity)
+	else:
+		_on_velocity_computed(new_velocity)
+	
+	# 检查路径点变化
+	var new_index = navigation_agent.get_current_navigation_path_index()
+	if current_path_index != new_index:
+		current_path_index = new_index
+		_start_rotation(navigation_agent.get_next_path_position())
 
 func _interrupt_current_action():
 	if rotate_tween and rotate_tween.is_running():
@@ -123,5 +130,6 @@ func _on_rotation_finished():
 	rotate_tween = null
 
 func _on_velocity_computed(safe_velocity: Vector2):
-	velocity = safe_velocity
-	move_and_slide()
+	if can_move_while_rotating || current_state == State.MOVING:
+		velocity = safe_velocity
+		move_and_slide()
