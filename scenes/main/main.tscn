@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://be8f2x52mk3vy" path="res://scenes/maps/map.tscn" id="1_iuonh"]
 [ext_resource type="PackedScene" uid="uid://st7im2qo5jw1" path="res://scenes/units/units.tscn" id="2_k2fmo"]
-[ext_resource type="PackedScene" uid="uid://jxguohqwm0qf" path="res://scenes/units/combat_engineer/combat_endineer.tscn" id="3_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://jxguohqwm0qf" path="res://scenes/units/combat_engineer/combat_engineer.tscn" id="3_k2fmo"]
 
 [node name="Main" type="Node2D"]
 
@@ -10,4 +10,4 @@
 
 [node name="Units" parent="." instance=ExtResource("2_k2fmo")]
 
-[node name="CombatEndineer" parent="Units" instance=ExtResource("3_k2fmo")]
+[node name="CombatEngineer" parent="Units" instance=ExtResource("3_k2fmo")]
