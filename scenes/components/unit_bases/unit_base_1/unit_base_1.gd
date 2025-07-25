@@ -5,6 +5,7 @@ enum State { IDLE, ROTATING, MOVING }
 
 @export var movement_speed = 50
 @export var rotate_speed: float = 3
+@export var can_move_while_rotating: bool = true
 
 var current_state: State = State.IDLE
 var rotate_tween: Tween
@@ -12,7 +13,6 @@ var current_path_index: int = -1
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var can_move_while_rotating: bool = true
 
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
@@ -39,7 +39,6 @@ func _physics_process(delta: float):
 			if can_move_while_rotating:
 				_perform_move()
 			else:
-				print("rotating ", velocity)
 				# 旋转前保持静止
 				velocity = Vector2.ZERO
 				move_and_slide()
@@ -48,7 +47,6 @@ func _physics_process(delta: float):
 			_perform_move()
 
 func _perform_move():
-	print("moving ", velocity)
 	if navigation_agent.is_navigation_finished():
 		current_state = State.IDLE
 		return

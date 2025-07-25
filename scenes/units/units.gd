@@ -1,8 +1,7 @@
 class_name Units
 extends Node2D
 
-## 单位仓库。用于注册单位用于动态生成。
-var registry: Dictionary[String, PackedScene] = {
+var registry: Dictionary[String, PackedScene] = { # 用于存放单位组件
 	"rts:combat_engineer" = preload("res://scenes/units/combat_engineer/combat_engineer.tscn"),
 }
 
