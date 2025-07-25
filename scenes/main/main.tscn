@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://drhbi3wa87gsk"]
+
+[ext_resource type="PackedScene" uid="uid://be8f2x52mk3vy" path="res://scenes/maps/maps.tscn" id="1_iuonh"]
+[ext_resource type="Script" uid="uid://b8c7yf2gfxafw" path="res://scenes/main/main.gd" id="1_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://st7im2qo5jw1" path="res://scenes/units_manager/units_manager.tscn" id="2_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://c7axqigmol20u" path="res://scenes/ui/ui.tscn" id="5_6q06x"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_l3cfh")
+
+[node name="Maps" parent="." instance=ExtResource("1_iuonh")]
+
+[node name="UnitsManager" parent="." instance=ExtResource("2_k2fmo")]
+unique_name_in_owner = true
+
+[node name="UI" parent="." instance=ExtResource("5_6q06x")]

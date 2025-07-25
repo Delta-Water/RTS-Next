@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgsy14re67fuq"]
+
+[ext_resource type="Script" uid="uid://bv2kindgqkvbe" path="res://scenes/units_manager/select_region.gd" id="1_7nkd4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nkd4"]
+
+[node name="SelectRegion" type="Area2D"]
+monitoring = false
+monitorable = false
+script = ExtResource("1_7nkd4")
+
+[node name="RegionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_7nkd4")
+
+[node name="RegionDisplay" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+color = Color(1, 1, 1, 0.54902)
