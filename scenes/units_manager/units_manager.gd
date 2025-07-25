@@ -2,6 +2,12 @@ class_name UnitsManager
 extends Node2D
 
 @export var units_path: String = "res://scenes/units_manager/"
+## 为`false`时关闭下属节点的交互（单位选择框）。
+@export var enable_interactions: bool = true :
+	set(val):
+		enable_interactions = val
+		select_region.enable = false
+		_mouse_origin = null
 
 @onready var units: Node2D = $Units
 @onready var select_region := $SelectRegion
@@ -14,7 +20,8 @@ var units_repository: Dictionary[String, PackedScene] = {}
 ## 用于存放被选择的单位
 var selected_units: Array[UnitBase1] = []
 
-var _mouse_origin: Vector2 = Vector2.ZERO
+## 存放鼠标按下的位置。因为需要`null`区分有没有按下鼠标，所以不标识类型。
+var _mouse_origin = Vector2.ZERO
 
 func _ready() -> void:
 	# 加载单位
@@ -34,23 +41,25 @@ func _ready() -> void:
 	
 	click.connect(_move_selected_units)
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("select_units"):
-		if select_region.enable:
-			select_region.end_point = get_global_mouse_position()
-		elif Input.is_action_just_pressed("select_units"):
-			_mouse_origin = get_local_mouse_position()
-		elif (_mouse_origin - get_local_mouse_position()).length_squared() > 64.0:
-			select_region.start_point = get_global_mouse_position()
-			select_region.enable = true
-	elif Input.is_action_just_released("select_units"):
-		if select_region.enable:
-			select_region.enable = false
-		else:
-			click.emit()
+func _input(_event: InputEvent) -> void:
+	if enable_interactions:
+		if Input.is_action_pressed("select_units"):
+			if select_region.enable:
+				select_region.end_point = get_global_mouse_position()
+			elif Input.is_action_just_pressed("select_units"):
+				_mouse_origin = get_local_mouse_position()
+			elif _mouse_origin != null && (_mouse_origin - get_local_mouse_position()).length_squared() > 64.0:
+				select_region.start_point = get_global_mouse_position()
+				select_region.enable = true
+		elif Input.is_action_just_released("select_units"):
+			if select_region.enable:
+				select_region.enable = false
+			else:
+				click.emit()
+			_mouse_origin = null
 
 func _move_selected_units() -> void:
-	for unit in selected_units:
+	for unit: UnitBase1 in selected_units:
 		unit.set_movement_target(get_global_mouse_position())
 
 ## 生成单位
