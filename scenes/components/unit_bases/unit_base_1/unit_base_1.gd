@@ -17,15 +17,14 @@ var current_path_index: int = -1
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 
-func _input(event: InputEvent):
-	if event.is_action_pressed("click"):
-		_interrupt_current_action()
-		current_path_index = -1
-		set_movement_target(event.position)
-		# 状态将在 physics_process 中更新
-		current_state = State.IDLE
+func set_movement_target(target: Vector2):
+	_interrupt_current_action()
+	current_path_index = -1
+	navigation_agent.target_position = target
+	# 状态将在 physics_process 中更新
+	current_state = State.IDLE
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	match current_state:
 		State.IDLE:
 			# 等待导航路径更新
@@ -69,9 +68,6 @@ func _interrupt_current_action():
 	if rotate_tween and rotate_tween.is_running():
 		rotate_tween.kill()
 	current_state = State.IDLE
-
-func set_movement_target(target: Vector2):
-	navigation_agent.target_position = target
 
 func _start_moving():
 	if navigation_agent.is_navigation_finished():
