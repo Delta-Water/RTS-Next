@@ -4,7 +4,7 @@ extends Node2D
 @onready var select_region := %SelectRegion
 
 func _ready() -> void:
-	#units.spawn_unit("rts:combat_engineer", Vector2(20, 20))
+	units.spawn_unit("rts:combat_engineer", Vector2(20, 20))
 	select_region.unit_enter.connect(func(unit):
 		units.selected_units.push_back(unit)
 	)

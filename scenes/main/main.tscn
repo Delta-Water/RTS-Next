@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://drhbi3wa87gsk"]
+[gd_scene load_steps=5 format=3 uid="uid://drhbi3wa87gsk"]
 
 [ext_resource type="PackedScene" uid="uid://be8f2x52mk3vy" path="res://scenes/maps/map.tscn" id="1_iuonh"]
 [ext_resource type="Script" uid="uid://b8c7yf2gfxafw" path="res://scenes/main/main.gd" id="1_l3cfh"]
 [ext_resource type="PackedScene" uid="uid://st7im2qo5jw1" path="res://scenes/units/units.tscn" id="2_k2fmo"]
-[ext_resource type="PackedScene" uid="uid://jxguohqwm0qf" path="res://scenes/units/combat_engineer/combat_engineer.tscn" id="3_k2fmo"]
-[ext_resource type="PackedScene" uid="uid://34ophqa8u7ai" path="res://scenes/units/scout/scout.tscn" id="5_6q06x"]
 [ext_resource type="PackedScene" uid="uid://cgsy14re67fuq" path="res://scenes/main/select_region.tscn" id="6_ow5a4"]
 
 [node name="Main" type="Node2D"]
@@ -14,11 +12,6 @@ script = ExtResource("1_l3cfh")
 
 [node name="Units" parent="." instance=ExtResource("2_k2fmo")]
 unique_name_in_owner = true
-
-[node name="CombatEngineer" parent="Units" instance=ExtResource("3_k2fmo")]
-position = Vector2(64, 128)
-
-[node name="Scout" parent="Units" instance=ExtResource("5_6q06x")]
 
 [node name="SelectRegion" parent="." instance=ExtResource("6_ow5a4")]
 unique_name_in_owner = true
