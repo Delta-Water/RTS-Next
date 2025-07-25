@@ -1,3 +1,3 @@
 extends Node
 
-var tile_map
+#var tile_map
