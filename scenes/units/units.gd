@@ -5,7 +5,7 @@ var registry: Dictionary[String, PackedScene] = { # 用于存放单位组件
 	"rts:combat_engineer" = preload("res://scenes/units/combat_engineer/combat_engineer.tscn"),
 }
 
-var selected_units: Array = []
+var selected_units: Array[UnitBase1] = []
 
 func _input(event):
 	# 监听单位移动事件
