@@ -27,7 +27,7 @@ func spawn_unit(type: String, unit_position: Vector2) -> UnitBase1:
 func _select_units():
 	pass
 
-func _load_units(dir_path: String) -> Dictionary[String, PackedScene]:
+func _load_units(dir_path: String, mod_namespace: String = "rts") -> Dictionary[String, PackedScene]:
 	# 确保路径以斜杠结尾
 	if not dir_path.ends_with("/"):
 		dir_path += "/"
@@ -60,8 +60,9 @@ func _load_units(dir_path: String) -> Dictionary[String, PackedScene]:
 				var unit_scene = load(unit_scene_path)
 				
 				if unit_scene is PackedScene:
-					dictionary[folder_name] = unit_scene
-					print("成功加载单位: ", folder_name)
+					var unit_id = "{0}:{1}".format([mod_namespace, folder_name])
+					dictionary[unit_id] = unit_scene
+					print("成功加载单位: ", unit_id)
 				else:
 					push_error("加载失败: " + unit_scene_path + " 不是有效的PackedScene资源")
 			else:
