@@ -1,32 +1,49 @@
-class_name Units
+class_name UnitsManager
 extends Node2D
 
-@export var units_path: String = "res://scenes/units/"
+@export var units_path: String = "res://scenes/units_manager/"
+
+@onready var units: Node2D = $Units
+@onready var select_region := $SelectRegion
 
 var units_repository: Dictionary[String, PackedScene] = {} # 用于存放单位组件
-var selected_units: Array[UnitBase1] = []
+var selected_units: Array[UnitBase1] = [] # 用于存放被选择的单位
 
 func _ready() -> void:
+	# 加载单位
 	units_repository = _load_units(units_path)
-	print(units_repository)
-
-func _input(event):
-	# 监听单位移动事件
 	# 监听单位选择事件
-	pass
+	select_region.unit_enter.connect(func(unit):
+		selected_units.push_back(unit)
+	)
+	select_region.unit_exit.connect(func(unit):
+		var idx = selected_units.find(unit)
+		if idx >= 0:
+			selected_units.remove_at(idx)
+	)
+	select_region.clear_units.connect(func():
+		self.selected_units.clear()
+	)
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_pressed("select_units"):
+		if Input.is_action_just_pressed("select_units"):
+			select_region.enable = true
+			select_region.start_point = get_global_mouse_position()
+		else:
+			select_region.end_point = get_global_mouse_position()
+	elif Input.is_action_just_released("select_units"):
+		select_region.enable = false
 
 ## 生成单位
 func spawn_unit(type: String, unit_position: Vector2) -> UnitBase1:
 	var scene: PackedScene = units_repository.get(type)
 	var node: UnitBase1 = scene.instantiate()
 	node.position = unit_position
-	add_child(node)
+	units.add_child(node)
 	return node
 
-# 单位选择逻辑
-func _select_units():
-	pass
-
+## 自动加载单位场景
 func _load_units(dir_path: String, mod_namespace: String = "rts") -> Dictionary[String, PackedScene]:
 	# 确保路径以斜杠结尾
 	if not dir_path.ends_with("/"):
