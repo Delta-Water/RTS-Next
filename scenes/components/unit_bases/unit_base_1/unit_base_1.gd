@@ -6,6 +6,13 @@ enum State { IDLE, ROTATING, MOVING }
 @export var movement_speed = 50
 @export var rotate_speed: float = 3
 @export var can_move_while_rotating: bool = true
+## 碰撞体积半径。
+## 与显示圆和碰撞体积同步。
+@export var shape_radius: float = 10.0 :
+	get: return shape_radius
+	set(val):
+		shape_radius = val
+		_update_shape(val)
 
 var current_state: State = State.IDLE
 var rotate_tween: Tween
@@ -17,6 +24,7 @@ var current_path_index: int = -1
 
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
+	_update_shape(shape_radius)
 
 func set_movement_target(target: Vector2):
 	_interrupt_current_action()
@@ -128,6 +136,10 @@ func _on_velocity_computed(safe_velocity: Vector2):
 	if can_move_while_rotating || current_state == State.MOVING:
 		velocity = safe_velocity
 		move_and_slide()
+
+func _update_shape(new_radius: float) -> void:
+	(collision_shape_2d.shape as CircleShape2D).radius = new_radius
+	selected_circle.radius = new_radius
 
 func change_selected_state(state: bool):
 	selected_circle.set_selected_state(state)
