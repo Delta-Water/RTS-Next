@@ -2,12 +2,26 @@ class_name UnitsManager
 extends Node2D
 
 @export var units_path: String = "res://scenes/units_manager/"
+## 为`false`时关闭下属节点的交互（单位选择框）。
+@export var enable_interactions: bool = true :
+	set(val):
+		enable_interactions = val
+		select_region.enable = false
+		_mouse_origin = null
 
 @onready var units: Node2D = $Units
 @onready var select_region := $SelectRegion
 
-var units_repository: Dictionary[String, PackedScene] = {} # 用于存放单位组件
-var selected_units: Array[UnitBase1] = [] # 用于存放被选择的单位
+## 点击信号，当`select_units`按下后鼠标未移动超过一定距离就松开时触发。
+signal click
+
+## 用于存放单位组件
+var units_repository: Dictionary[String, PackedScene] = {}
+## 用于存放被选择的单位
+var selected_units: Array[UnitBase1] = []
+
+## 存放鼠标按下的位置。因为需要`null`区分有没有按下鼠标，所以不标识类型。
+var _mouse_origin = Vector2.ZERO
 
 func _ready() -> void:
 	# 加载单位
@@ -24,16 +38,29 @@ func _ready() -> void:
 	select_region.clear_units.connect(func():
 		self.selected_units.clear()
 	)
+	
+	click.connect(_move_selected_units)
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("select_units"):
-		if Input.is_action_just_pressed("select_units"):
-			select_region.enable = true
-			select_region.start_point = get_global_mouse_position()
-		else:
-			select_region.end_point = get_global_mouse_position()
-	elif Input.is_action_just_released("select_units"):
-		select_region.enable = false
+func _input(_event: InputEvent) -> void:
+	if enable_interactions:
+		if Input.is_action_pressed("select_units"):
+			if select_region.enable:
+				select_region.end_point = get_global_mouse_position()
+			elif Input.is_action_just_pressed("select_units"):
+				_mouse_origin = get_local_mouse_position()
+			elif _mouse_origin != null && (_mouse_origin - get_local_mouse_position()).length_squared() > 64.0:
+				select_region.start_point = get_global_mouse_position()
+				select_region.enable = true
+		elif Input.is_action_just_released("select_units"):
+			if select_region.enable:
+				select_region.enable = false
+			else:
+				click.emit()
+			_mouse_origin = null
+
+func _move_selected_units() -> void:
+	for unit: UnitBase1 in selected_units:
+		unit.set_movement_target(get_global_mouse_position())
 
 ## 生成单位
 func spawn_unit(type: String, unit_position: Vector2) -> UnitBase1:
@@ -43,7 +70,9 @@ func spawn_unit(type: String, unit_position: Vector2) -> UnitBase1:
 	units.add_child(node)
 	return node
 
-## 自动加载单位场景
+## 从文件夹加载单位。
+## 扫描`dir_path`，尝试加载子目录中的`${目录名}.tscn`场景文件，
+## 并以`${mod_namespace}:${目录名}`为键存入返回的字典中。
 func _load_units(dir_path: String, mod_namespace: String = "rts") -> Dictionary[String, PackedScene]:
 	# 确保路径以斜杠结尾
 	if not dir_path.ends_with("/"):
