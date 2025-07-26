@@ -10,11 +10,11 @@ radius = 20.0
 [node name="CombatEngineer" instance=ExtResource("1_bxk6l")]
 script = ExtResource("2_x2l3i")
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_heby1")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("3_heby1")
 
-[node name="NavigationAgent2D" parent="." index="2"]
+[node name="NavigationAgent2D" parent="." index="3"]
 simplify_epsilon = 1.0

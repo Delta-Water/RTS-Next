@@ -38,6 +38,8 @@ func _ready() -> void:
 			selected_units.remove_at(idx)
 	)
 	select_region.clear_units.connect(func():
+		for unit in selected_units:
+			unit.change_selected_state(false)
 		selected_units.clear()
 	)
 	

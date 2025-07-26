@@ -1,9 +1,9 @@
 extends Node2D
 
 var collision_shape_2d: CollisionShape2D
-var is_selected = false
 
 func _ready() -> void:
+	hide()
 	collision_shape_2d = get_parent().get_child(1)
 
 func _physics_process(delta: float) -> void:
