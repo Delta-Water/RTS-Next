@@ -35,6 +35,8 @@ func start_pulse() -> void:
 	
 	# 动画序列
 	scale_tween = create_tween()
-	scale_tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1) # 放大到150%
-	scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)  # 缩小回原始大小
+	scale_tween.set_ease(Tween.EASE_IN)
+	scale_tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1).set_trans(Tween.TRANS_SPRING) # 放大到120%
+	scale_tween.set_ease(Tween.EASE_OUT)
+	scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1).set_trans(Tween.TRANS_SPRING)  # 缩小回原始大小
 	scale_tween.tween_callback(func(): scale_tween = null)
