@@ -1,5 +1,6 @@
 extends Node2D
 
+var tween: Tween
 var collision_shape_2d: CollisionShape2D
 
 func _ready() -> void:
@@ -24,5 +25,15 @@ func _draw() -> void:
 func set_selected_state(state: bool):
 	if state:
 		show()
+		start_pulse()
 	else:
 		hide()
+
+func start_pulse() -> void:
+	if tween and tween.is_running():
+		tween.kill()
+	
+	# 动画序列
+	tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1) # 放大到150%
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)  # 缩小回原始大小
