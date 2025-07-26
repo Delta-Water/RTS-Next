@@ -7,12 +7,18 @@ enum State { IDLE, ROTATING, MOVING }
 @export var rotate_speed: float = 3
 @export var can_move_while_rotating: bool = true
 ## 碰撞体积半径。
-## 与显示圆和碰撞体积同步。
-@export var shape_radius: float = 10.0 :
-	get: return shape_radius
+@export_range(0.1, 50.0, 0.1, "or_greater")
+var radius: float = 10.0 :
 	set(val):
-		shape_radius = val
-		_update_shape(val)
+		radius = val
+		(collision_shape_2d.shape as CircleShape2D).radius = val
+
+## 显示体积半径。
+@export_range(0.1, 50.0, 0.1, "or_greater")
+var display_radius: float = 10.0 :
+	set(val):
+		display_radius = val
+		selected_circle.radius = val
 
 var current_state: State = State.IDLE
 var rotate_tween: Tween
@@ -24,7 +30,10 @@ var current_path_index: int = -1
 
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
-	_update_shape(shape_radius)
+	
+	# 调用set函数更新状态
+	radius = radius
+	display_radius = display_radius
 
 func set_movement_target(target: Vector2):
 	_interrupt_current_action()
@@ -32,6 +41,11 @@ func set_movement_target(target: Vector2):
 	navigation_agent.target_position = target
 	# 状态将在 physics_process 中更新
 	current_state = State.IDLE
+
+## 同步碰撞体积和显示体积的半径。
+func set_both_radius(new_radius: float) -> void:
+	radius = new_radius
+	display_radius = new_radius
 
 func _physics_process(_delta: float):
 	match current_state:
@@ -136,10 +150,6 @@ func _on_velocity_computed(safe_velocity: Vector2):
 	if can_move_while_rotating || current_state == State.MOVING:
 		velocity = safe_velocity
 		move_and_slide()
-
-func _update_shape(new_radius: float) -> void:
-	(collision_shape_2d.shape as CircleShape2D).radius = new_radius
-	selected_circle.radius = new_radius
 
 func change_selected_state(state: bool):
 	selected_circle.set_selected_state(state)
