@@ -45,17 +45,17 @@ func _ready() -> void:
 	
 	click.connect(_move_selected_units)
 
-func _input(_event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if enable_interactions:
 		if Input.is_action_pressed("select_units"):
 			if select_region.enable:
 				select_region.end_point = get_global_mouse_position()
-			elif Input.is_action_just_pressed("select_units"):
+			elif event.is_action_pressed("select_units"):
 				_mouse_origin = get_local_mouse_position()
 			elif _mouse_origin != null && (_mouse_origin - get_local_mouse_position()).length_squared() > 64.0:
 				select_region.start_point = get_global_mouse_position()
 				select_region.enable = true
-		elif Input.is_action_just_released("select_units"):
+		elif event.is_action_released("select_units"):
 			if select_region.enable:
 				select_region.enable = false
 			else:
