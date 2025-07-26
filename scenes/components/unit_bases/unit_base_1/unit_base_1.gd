@@ -12,7 +12,8 @@ var rotate_tween: Tween
 var current_path_index: int = -1
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var selected_circle: Node2D = $SelectedCircle
 
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
@@ -127,3 +128,6 @@ func _on_velocity_computed(safe_velocity: Vector2):
 	if can_move_while_rotating || current_state == State.MOVING:
 		velocity = safe_velocity
 		move_and_slide()
+
+func change_selected_state(state: bool):
+	selected_circle.set_selected_state(state)

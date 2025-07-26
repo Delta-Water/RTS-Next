@@ -28,15 +28,17 @@ func _ready() -> void:
 	units_repository = _load_units(units_path)
 	# 监听单位选择事件
 	select_region.unit_enter.connect(func(unit):
+		unit.change_selected_state(true)
 		selected_units.push_back(unit)
 	)
 	select_region.unit_exit.connect(func(unit):
+		unit.change_selected_state(false)
 		var idx = selected_units.find(unit)
 		if idx >= 0:
 			selected_units.remove_at(idx)
 	)
 	select_region.clear_units.connect(func():
-		self.selected_units.clear()
+		selected_units.clear()
 	)
 	
 	click.connect(_move_selected_units)
