@@ -15,7 +15,8 @@ func erase_building_rect(rect: Rect2i) -> void:
 
 func update_building_position(building: BuildingBase) -> void:
 	building.global_position = object_layer.to_global(object_layer.map_to_local(building.tile_position)) - Vector2(object_layer.tile_set.tile_size) / 2.0
-	navigation_region.bake_navigation_polygon.call_deferred()
+	building.display_container.position = object_layer.to_global(object_layer.tile_set.tile_size * building.place_rect.size) / 2.0
+	queue_bake()
 
 func fill_building_rect(old_rect: Rect2i) -> void:
 	var src_id := object_layer.tile_set.get_source_id(0)

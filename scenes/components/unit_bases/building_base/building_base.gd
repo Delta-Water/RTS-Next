@@ -3,7 +3,7 @@ extends StaticBody2D
 
 @export var preview_mode: bool = false :
 	set(val):
-		modulate.a = 0.4 if val else 1.0
+		display_container.modulate.a = 0.4 if val else 1.0
 		if collision_polygon:
 			collision_polygon.disabled = val
 			if val != preview_mode:
@@ -40,6 +40,7 @@ extends StaticBody2D
 		_update_rect(old_rect)
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon
+@onready var display_container: Node2D = $DisplayContainer
 
 func _ready() -> void:
 	_update_rect(get_rect())
