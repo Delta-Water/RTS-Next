@@ -1,8 +1,10 @@
 ### 任务面板
 | 状态 | 任务 | 分支 |
 | --- | --- | --- |
-| 已完成 | 单位被选中后出现提示 | `feat/selected_then_highlight` |
-| 进行中 | 规范代码 | `feat/standardize_code` |
+| :white_check_mark: 已完成 | 单位被选中后才能设置移动 | `feat/selected_then_set` |
+| 进行中 | 单位被选中后出现提示 | `feat/selected_then_highlight` |
+| 进行中 | 建筑系统 | `feat/building_system` |
+| 未进行 | 允许取消选中并选择新的单位 | `feat/selected_then_cancel` |
 ---
 我们团队使用Git进行版本控制，采用标准的Git工作流：
 ### 分支管理 & 开发流程
