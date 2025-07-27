@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt1g12nxf4fii"]
+
+[ext_resource type="Script" uid="uid://conxnxix1hcaq" path="res://scenes/components/canvas_items/lines_to_target/lines_to_target.gd" id="1_nrc23"]
+
+[node name="LinesToTarget" type="Node2D"]
+script = ExtResource("1_nrc23")

@@ -17,19 +17,16 @@ var radius: float = 10.0:
 
 ## 显示体积半径。
 @export_range(0.1, 50.0, 0.1, "or_greater")
-var display_radius: float = 10.0:
-	set(val):
-		display_radius = val
-		if selected_circle:
-			selected_circle.radius = val
+var display_radius: float = 10.0
 
+var is_selected: bool = false
+var target_position:Vector2 = Vector2(0, 0)
 var current_state: State = State.IDLE
 var rotate_tween: Tween
 var current_path_index: int = -1
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var selected_circle: Node2D = $SelectedCircle
 
 func _ready() -> void:
 	navigation_agent_2d.velocity_computed.connect(_on_velocity_computed)
@@ -40,6 +37,7 @@ func _ready() -> void:
 
 func set_movement_target(target: Vector2):
 	_interrupt_current_action()
+	target_position = target
 	current_path_index = -1
 	navigation_agent_2d.target_position = target
 	# 状态将在 physics_process 中更新
@@ -155,4 +153,4 @@ func _on_velocity_computed(safe_velocity: Vector2):
 		move_and_slide()
 
 func change_selected_state(state: bool):
-	selected_circle.set_selected_state(state)
+	is_selected = state
