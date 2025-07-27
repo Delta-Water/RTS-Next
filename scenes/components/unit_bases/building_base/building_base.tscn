@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0vm0mdxc1wqa"]
+
+[ext_resource type="Script" uid="uid://cjqiqta4pne3t" path="res://scenes/components/unit_bases/building_base/building_base.gd" id="1_mmbcq"]
+
+[node name="BuildingBase" type="StaticBody2D"]
+script = ExtResource("1_mmbcq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 80, 0, 80, 80, 0, 80)

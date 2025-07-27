@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bxi8caf42vkjq"]
 
 [ext_resource type="Script" uid="uid://ba5uy1lfj0di1" path="res://scenes/components/unit_bases/unit_base_1/unit_base_1.gd" id="1_wdn5u"]
-[ext_resource type="Script" uid="uid://kx75bvu8gscl" path="res://scenes/components/unit_bases/unit_base_1/selected_circle.gd" id="2_2ecdi"]
+[ext_resource type="Script" path="res://scenes/components/unit_bases/unit_base_1/selected_circle.gd" id="2_2ecdi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ecdi"]
 

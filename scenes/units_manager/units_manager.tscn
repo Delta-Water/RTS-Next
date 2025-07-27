@@ -8,4 +8,6 @@ script = ExtResource("1_c7eo6")
 
 [node name="Units" type="Node2D" parent="."]
 
+[node name="Buildings" type="Node2D" parent="."]
+
 [node name="SelectRegion" parent="." instance=ExtResource("2_8wlri")]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtl76hc8g75h3"]
+
+[ext_resource type="PackedScene" uid="uid://b0vm0mdxc1wqa" path="res://scenes/components/unit_bases/building_base/building_base.tscn" id="1_0r540"]
+[ext_resource type="Texture2D" uid="uid://w5wxsntqat17" path="res://assets/units/mech_factory/mechFactoryBottom.png" id="2_m4jrq"]
+
+[node name="MechFactory" instance=ExtResource("1_0r540")]
+place_rect = Rect2i(0, 0, 4, 5)
+collision_rect = Rect2(0, 20, 80, 80)
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_m4jrq")
+centered = false

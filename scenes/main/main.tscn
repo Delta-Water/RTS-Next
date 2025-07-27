@@ -10,7 +10,16 @@ script = ExtResource("1_l3cfh")
 
 [node name="Maps" parent="." instance=ExtResource("1_iuonh")]
 
+[node name="NavigationRegion2D" parent="Maps" index="0" groups=["npsgg_test"]]
+
+[node name="Overlay" parent="Maps" index="2" groups=["npsgg_test"]]
+
 [node name="UnitsManager" parent="." instance=ExtResource("2_k2fmo")]
 unique_name_in_owner = true
 
+[node name="Buildings" parent="UnitsManager" index="1" groups=["npsgg_test"]]
+
 [node name="UI" parent="." instance=ExtResource("5_6q06x")]
+
+[editable path="Maps"]
+[editable path="UnitsManager"]
