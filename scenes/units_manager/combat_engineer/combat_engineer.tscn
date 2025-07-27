@@ -4,14 +4,15 @@
 [ext_resource type="Script" uid="uid://dnppn1hcgnbwe" path="res://scenes/units_manager/combat_engineer/combat_engineer.gd" id="2_x2l3i"]
 [ext_resource type="Texture2D" uid="uid://b8u4jif52omqd" path="res://assets/units/combat_engineer/base.png" id="3_heby1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_heby1"]
-radius = 20.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_7vdqw"]
 
 [node name="CombatEngineer" instance=ExtResource("1_bxk6l")]
 script = ExtResource("2_x2l3i")
+radius = 20.0
+display_radius = 20.0
 
 [node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource("CircleShape2D_heby1")
+shape = SubResource("CircleShape2D_7vdqw")
 
 [node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("3_heby1")

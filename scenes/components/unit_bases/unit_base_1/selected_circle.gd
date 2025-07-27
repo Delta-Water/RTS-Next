@@ -1,12 +1,10 @@
 extends Node2D
 
+@export var radius: float = 10.0
 var scale_tween: Tween
-var collision_shape_2d: CollisionShape2D
-var radius: float = 10.0
 
 func _ready() -> void:
 	hide()
-	collision_shape_2d = get_parent().get_child(1)
 
 func _physics_process(_delta: float) -> void:
 	queue_redraw()
@@ -25,11 +23,11 @@ func _draw() -> void:
 func set_selected_state(state: bool):
 	if state:
 		show()
-		start_pulse()
+		start_scale()
 	else:
 		hide()
 
-func start_pulse() -> void:
+func start_scale() -> void:
 	if scale_tween and scale_tween.is_running():
 		scale_tween.kill()
 	
