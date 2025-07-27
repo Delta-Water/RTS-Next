@@ -40,5 +40,5 @@ func _process(_delta: float) -> void:
 	_frame_end_callback.call_deferred()
 
 func _frame_end_callback() -> void:
-	if navigation_region_need_bake:
+	if navigation_region_need_bake && !navigation_region.is_baking():
 		navigation_region.bake_navigation_polygon()
