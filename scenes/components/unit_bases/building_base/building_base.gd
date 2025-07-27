@@ -1,6 +1,16 @@
 class_name BuildingBase
 extends StaticBody2D
 
+@export var preview_mode: bool = false :
+	set(val):
+		modulate.a = 0.4 if val else 1.0
+		if collision_polygon:
+			collision_polygon.disabled = val
+			if val != preview_mode:
+				var tree = get_tree()
+				if tree: tree.call_group("maps", "queue_bake")
+		preview_mode = val
+
 @export_group("Size")
 ## 建筑的占地面积，只能使用整数坐标(单位为一个tile图格大小)。与碰撞体积无关。
 @export var place_rect: Rect2i = Rect2i(0, 0, 4, 4) :
@@ -34,12 +44,12 @@ extends StaticBody2D
 func _ready() -> void:
 	_update_rect(get_rect())
 	collision_rect = collision_rect
+	preview_mode = preview_mode
 
 ## 通过节点组`maps`调用地图管理器更新节点位置。
 func _update_rect(old_rect: Rect2i) -> void:
-	var tree = get_tree()
-	if tree:
-		tree.call_group("maps", "update_building_rect", self, old_rect)
+	if is_node_ready():
+		get_tree().call_group("maps", "update_building_rect", self, old_rect)
 
 func _exit_tree() -> void:
 	# 清理Object占用，重构导航多边形。
@@ -52,3 +62,8 @@ func get_rect() -> Rect2i:
 	var r = place_rect
 	r.position += tile_position
 	return r
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey && (event as InputEventKey).as_text_keycode() == "R" && (event as InputEventKey).is_pressed():
+		preview_mode = !preview_mode
+		print("preview_mode has switched to {0}".format([preview_mode]))
