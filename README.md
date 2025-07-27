@@ -3,6 +3,7 @@
 | --- | --- | --- |
 | 已完成 | 单位被选中后出现提示 | `feat/selected_then_highlight` |
 | 进行中 | 建筑系统 | `feat/building_system` |
+| 进行中 | 改进寻路 | `feat/update_navigation` |
 ---
 我们团队使用Git进行版本控制，采用标准的Git工作流：
 ### 分支管理 & 开发流程
