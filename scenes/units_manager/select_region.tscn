@@ -5,6 +5,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nkd4"]
 
 [node name="SelectRegion" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
 monitoring = false
 monitorable = false
 script = ExtResource("1_7nkd4")

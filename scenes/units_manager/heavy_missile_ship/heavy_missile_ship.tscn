@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c48qsc1fhs0kh"]
+
+[ext_resource type="PackedScene" uid="uid://bxi8caf42vkjq" path="res://scenes/components/unit_bases/unit_base_1/unit_base_1.tscn" id="1_i3okn"]
+[ext_resource type="Texture2D" uid="uid://biiom7ie425b" path="res://assets/units/heavy_missile_ship/body.png" id="2_dlo2f"]
+[ext_resource type="Script" uid="uid://b7r8mygil8v3k" path="res://scenes/units_manager/heavy_missile_ship/heavy_missile_ship.gd" id="2_kcmma"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_61sws"]
+radius = 40.0
+
+[node name="HeavyMissileShip" instance=ExtResource("1_i3okn")]
+script = ExtResource("2_kcmma")
+movement_speed = 20
+rotate_speed = 1.0
+can_move_while_rotating = false
+radius = 40.0
+display_radius = 40.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_61sws")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_dlo2f")
+
+[node name="NavigationAgent2D" parent="." index="2"]
+avoidance_priority = 1.0

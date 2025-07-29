@@ -1,5 +1,9 @@
 extends Node2D
 
+var unit_position: Vector2 = Vector2(0, 0)
+var target_position: Vector2 = Vector2(0, 0)
+var scale_tween: Tween
+
 var state: bool:
 	set(val):
 		if state != val:
@@ -11,10 +15,6 @@ var state: bool:
 			else:
 				hide()
 
-var unit_position: Vector2 = Vector2(0, 0)
-var target_position: Vector2 = Vector2(0, 0)
-var scale_tween: Tween
-
 func _ready() -> void:
 	hide()
 
@@ -23,12 +23,9 @@ func _physics_process(_delta: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	var start_point = unit_position
-	var end_point = target_position
 	# 定义颜色（红色）
 	var line_color = Color(0, 1, 0) # 绿色
-	# 绘制直线，线宽为2，不抗锯齿
-	draw_line(start_point, end_point, line_color, 1, false)
+	draw_line(unit_position, target_position, line_color, 1, false)
 
 func set_selected_state(is_selected: bool):
 		state = is_selected

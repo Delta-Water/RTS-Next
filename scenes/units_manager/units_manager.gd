@@ -72,8 +72,8 @@ func spawn_unit(type: String, unit_position: Vector2) -> UnitBase1:
 	var scene: PackedScene = units_repository.get(type)
 	var node: UnitBase1 = scene.instantiate()
 	node.position = unit_position
-	units.add_child(node)
 	canvas_manager.create_canvas_for_unit(node)
+	units.add_child(node)
 	return node
 
 ## 从文件夹加载单位。

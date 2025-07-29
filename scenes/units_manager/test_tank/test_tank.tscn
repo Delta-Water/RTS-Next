@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://begfcpytqfydc"]
+
+[ext_resource type="PackedScene" uid="uid://bxi8caf42vkjq" path="res://scenes/components/unit_bases/unit_base_1/unit_base_1.tscn" id="1_f42mt"]
+[ext_resource type="Texture2D" uid="uid://dtrbq25ncdrue" path="res://assets/units/test_tank/tank.png" id="2_3f1vf"]
+[ext_resource type="Script" uid="uid://b7bi66y0jyuke" path="res://scenes/units_manager/test_tank/test_tank.gd" id="2_jxa8y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3f1vf"]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxa8y"]
+atlas = ExtResource("2_3f1vf")
+region = Rect2(0, 0, 16, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdv0u"]
+atlas = ExtResource("2_3f1vf")
+region = Rect2(16, 0, 16, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avrg3"]
+atlas = ExtResource("2_3f1vf")
+region = Rect2(32, 0, 16, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xw48k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxa8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdv0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avrg3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestTank" instance=ExtResource("1_f42mt")]
+script = ExtResource("2_jxa8y")
+movement_speed = 70
+rotate_speed = 4.0
+can_move_while_rotating = false
+radius = 15.0
+display_radius = 15.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_3f1vf")
+
+[node name="NavigationAgent2D" parent="." index="2"]
+navigation_layers = 2
+avoidance_priority = 0.1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_xw48k")
+autoplay = "default"
+frame = 2
+frame_progress = 0.627187

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://du24umt72c1qf"]
+
+[ext_resource type="PackedScene" uid="uid://bxi8caf42vkjq" path="res://scenes/components/unit_bases/unit_base_1/unit_base_1.tscn" id="1_eiugy"]
+[ext_resource type="Texture2D" uid="uid://dgs68nc2muwgo" path="res://assets/units/heavy_sub/base.png" id="2_7oy0d"]
+[ext_resource type="Script" uid="uid://y2inbr5q4hpy" path="res://scenes/units_manager/heavy_sub/heavy_sub.gd" id="2_65vgq"]
+
+[node name="HeavySub" instance=ExtResource("1_eiugy")]
+script = ExtResource("2_65vgq")
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_7oy0d")
+
+[node name="Area2D" parent="." index="4"]
+collision_layer = 2
+collision_mask = 2

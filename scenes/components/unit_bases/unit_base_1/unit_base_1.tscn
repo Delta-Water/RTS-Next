@@ -1,17 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxi8caf42vkjq"]
+[gd_scene load_steps=3 format=3 uid="uid://bxi8caf42vkjq"]
 
 [ext_resource type="Script" uid="uid://ba5uy1lfj0di1" path="res://scenes/components/unit_bases/unit_base_1/unit_base_1.gd" id="1_wdn5u"]
-[ext_resource type="Script" uid="uid://kx75bvu8gscl" path="res://scenes/components/unit_bases/unit_base_1/selected_circle.gd" id="2_2ecdi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ecdi"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5imxo"]
-
 [node name="UnitBase1" type="CharacterBody2D"]
+collision_layer = 2147483648
+collision_mask = 2147483648
+safe_margin = 0.1
 script = ExtResource("1_wdn5u")
-
-[node name="SelectedCircle" type="Node2D" parent="."]
-script = ExtResource("2_2ecdi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2ecdi")
@@ -22,13 +19,8 @@ rotation = 1.5708
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 1.0
 target_desired_distance = 1.0
-path_max_distance = 20.0
 simplify_path = true
+simplify_epsilon = 6.0
 avoidance_enabled = true
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_5imxo")
+avoidance_priority = 0.5
+debug_enabled = true

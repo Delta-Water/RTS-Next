@@ -12,7 +12,6 @@ func _physics_process(delta: float) -> void:
 # 为指定单位创建画布
 func create_canvas_for_unit(unit: UnitBase1):
 	# 创建新画布
-	print("creat canvas for: " + str(unit))
 	var circle = SELECTED_HIGHLIGHT_CIRCLE.instantiate()
 	var lines = LINES_TO_TARGET.instantiate()
 	circle.unit_position = unit.position

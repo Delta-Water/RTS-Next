@@ -13,7 +13,7 @@ var radius: float = 10.0:
 		radius = val
 		if collision_shape_2d and navigation_agent_2d:
 			(collision_shape_2d.shape as CircleShape2D).radius = val
-			navigation_agent_2d.radius = val
+			navigation_agent_2d.radius = val + 1
 
 ## 显示体积半径。
 @export_range(0.1, 50.0, 0.1, "or_greater")
@@ -29,6 +29,7 @@ var current_path_index: int = -1
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
+	print(navigation_agent_2d.is_navigation_finished())
 	navigation_agent_2d.velocity_computed.connect(_on_velocity_computed)
 	
 	# 再次调用set函数保证子节点属性被正确赋值
@@ -100,7 +101,7 @@ func _start_moving():
 	# 初始旋转
 	_start_rotation(navigation_agent_2d.get_next_path_position())
 
-func _start_rotation(target_position: Vector2):
+func _start_rotation(_target_position: Vector2):
 	current_state = State.ROTATING
 	navigation_agent_2d.set_velocity_forced(Vector2.ZERO)
 	
@@ -109,7 +110,7 @@ func _start_rotation(target_position: Vector2):
 		rotate_tween.kill()
 	
 	# 计算目标方向（使用全局位置）
-	var direction_to_target = (target_position - global_position).normalized()
+	var direction_to_target = (_target_position - global_position).normalized()
 	var target_angle = direction_to_target.angle()
 	
 	# 计算最短旋转角度

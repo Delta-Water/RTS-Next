@@ -27,11 +27,11 @@ func _draw() -> void:
 	
 	# 绘制圆形轮廓
 	var outline_color = Color(0.2, 0.8, 0.2)  # 绿色轮廓
-	draw_circle(center, radius, outline_color, false, 1)
+	draw_circle(center, radius, outline_color, false, 2)
 	
 	# 绘制半透明填充
-	var fill_color = Color(0, 1, 0, 0.2)  # 半透明绿色填充
-	draw_circle(center, radius, fill_color, true)
+	#var fill_color = Color(0, 1, 0, 0.2)  # 半透明绿色填充
+	#draw_circle(center, radius, fill_color, true)
 
 func set_selected_state(is_selected: bool):
 		state = is_selected
