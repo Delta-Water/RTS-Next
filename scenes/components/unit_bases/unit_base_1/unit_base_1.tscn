@@ -7,7 +7,7 @@
 [node name="UnitBase1" type="CharacterBody2D"]
 collision_layer = 2147483648
 collision_mask = 2147483648
-safe_margin = 0.1
+safe_margin = 1.0
 script = ExtResource("1_wdn5u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

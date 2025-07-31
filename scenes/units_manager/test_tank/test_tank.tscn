@@ -38,7 +38,7 @@ animations = [{
 
 [node name="TestTank" instance=ExtResource("1_f42mt")]
 script = ExtResource("2_jxa8y")
-movement_speed = 70
+max_speed = 70.0
 rotate_speed = 4.0
 can_move_while_rotating = false
 radius = 15.0
