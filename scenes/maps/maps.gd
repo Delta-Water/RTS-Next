@@ -42,3 +42,4 @@ func _process(_delta: float) -> void:
 func _frame_end_callback() -> void:
 	if navigation_region_need_bake && !navigation_region.is_baking():
 		navigation_region.bake_navigation_polygon()
+		navigation_region_need_bake = false

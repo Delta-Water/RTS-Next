@@ -62,7 +62,6 @@ enum State {
 
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon
 @onready var display_container: Node2D = $DisplayContainer
-@onready var progress_bar: Node2D = $ProgressBar
 
 ## 当前的建造进度，范围 [0,1]
 var current_build_progress: float = 0.0 :
