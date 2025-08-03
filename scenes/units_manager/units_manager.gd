@@ -46,6 +46,18 @@ func _ready() -> void:
 	
 	click.connect(_move_selected_units)
 
+#func _process(delta: float) -> void:
+	#update_idle_unit_positions()
+		#
+#
+#func update_idle_unit_positions():
+	#var unit_positions: Array = []
+	#for unit in units.get_children():
+		#var unit_position = Core.ground.local_to_map(unit.position)
+		#if unit.current_state == unit.State.IDLE and not unit_positions.has(unit_position):
+			#unit_positions.push_back(unit_position)
+	#Core.ground.update_navigation_region(unit_positions)
+
 func _input(event: InputEvent) -> void:
 	if enable_interactions:
 		if Input.is_action_pressed("select_units"):

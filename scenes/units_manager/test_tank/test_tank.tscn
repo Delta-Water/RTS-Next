@@ -39,7 +39,6 @@ animations = [{
 [node name="TestTank" instance=ExtResource("1_f42mt")]
 script = ExtResource("2_jxa8y")
 max_speed = 70.0
-rotate_speed = 4.0
 can_move_while_rotating = false
 radius = 15.0
 display_radius = 15.0
@@ -49,7 +48,6 @@ shape = SubResource("CircleShape2D_3f1vf")
 
 [node name="NavigationAgent2D" parent="." index="2"]
 navigation_layers = 2
-avoidance_priority = 0.1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
 rotation = 1.5708

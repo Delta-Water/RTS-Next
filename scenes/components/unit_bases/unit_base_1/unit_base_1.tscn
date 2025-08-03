@@ -4,10 +4,15 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ecdi"]
 
-[node name="UnitBase1" type="CharacterBody2D"]
+[node name="UnitBase1" type="RigidBody2D"]
 collision_layer = 2147483648
 collision_mask = 2147483648
-safe_margin = 1.0
+gravity_scale = 0.0
+inertia = 1.0
+linear_damp_mode = 1
+linear_damp = 0.1
+angular_damp_mode = 1
+angular_damp = 10.0
 script = ExtResource("1_wdn5u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -19,8 +24,11 @@ rotation = 1.5708
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 1.0
 target_desired_distance = 1.0
+path_max_distance = 10.0
+path_metadata_flags = 2
 simplify_path = true
 simplify_epsilon = 6.0
 avoidance_enabled = true
+max_speed = 50.0
 avoidance_priority = 0.5
 debug_enabled = true
