@@ -55,3 +55,6 @@ sprite_frames = SubResource("SpriteFrames_xw48k")
 autoplay = "default"
 frame = 2
 frame_progress = 0.627187
+
+[node name="MapRigidBody" parent="." index="5"]
+collision_mask = 144

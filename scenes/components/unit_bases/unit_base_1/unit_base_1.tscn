@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxi8caf42vkjq"]
+[gd_scene load_steps=4 format=3 uid="uid://bxi8caf42vkjq"]
 
 [ext_resource type="Script" uid="uid://ba5uy1lfj0di1" path="res://scenes/components/unit_bases/unit_base_1/unit_base_1.gd" id="1_wdn5u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ecdi"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gqyl"]
+
 [node name="UnitBase1" type="RigidBody2D"]
-collision_layer = 2147483648
-collision_mask = 2147483648
+collision_layer = 2147483649
+collision_mask = 2147483649
 gravity_scale = 0.0
 inertia = 1.0
 linear_damp_mode = 1
@@ -32,3 +34,14 @@ avoidance_enabled = true
 max_speed = 50.0
 avoidance_priority = 0.5
 debug_enabled = true
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("..")
+node_b = NodePath("../MapRigidBody")
+bias = 0.25
+
+[node name="MapRigidBody" type="RigidBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapRigidBody"]
+shape = SubResource("CircleShape2D_4gqyl")

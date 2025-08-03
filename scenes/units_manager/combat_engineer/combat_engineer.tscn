@@ -8,7 +8,6 @@
 radius = 20.0
 
 [node name="CombatEngineer" instance=ExtResource("1_bxk6l")]
-collision_mask = 2147483656
 script = ExtResource("2_x2l3i")
 radius = 20.0
 display_radius = 20.0
@@ -22,7 +21,5 @@ texture = ExtResource("3_heby1")
 [node name="NavigationAgent2D" parent="." index="2"]
 navigation_layers = 7
 
-[node name="RigidBody2D" parent="." index="3"]
-collision_layer = 8
-collision_mask = 8
-gravity_scale = 0.0
+[node name="MapRigidBody" parent="." index="4"]
+collision_mask = 128
