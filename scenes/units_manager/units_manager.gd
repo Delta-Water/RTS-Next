@@ -10,6 +10,7 @@ extends Node2D
 		_mouse_origin = null
 
 @onready var units: Node2D = $Units
+@onready var buildings: Node2D = $Buildings
 @onready var select_region := $SelectRegion
 
 ## 点击信号，当`select_units`按下后鼠标未移动超过一定距离就松开时触发。
@@ -72,6 +73,14 @@ func spawn_unit(type: String, unit_position: Vector2) -> UnitBase1:
 	var node: UnitBase1 = scene.instantiate()
 	node.position = unit_position
 	units.add_child(node)
+	return node
+
+## 生成建筑
+func spawn_building(type: String, building_position: Vector2i) -> BuildingBase:
+	var scene: PackedScene = units_repository.get(type)
+	var node: BuildingBase = scene.instantiate()
+	node.tile_position = building_position
+	buildings.add_child(node)
 	return node
 
 ## 从文件夹加载单位。
