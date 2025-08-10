@@ -6,7 +6,7 @@ const LINES_TO_TARGET = preload("res://scenes/components/canvas_items/lines_to_t
 # 存储单位与其对应画布的映射
 var unit_canvas = {}
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	update_canvas()
 
 # 为指定单位创建画布

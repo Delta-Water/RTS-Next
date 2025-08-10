@@ -6,9 +6,7 @@
 
 [node name="HeavySub" instance=ExtResource("1_eiugy")]
 script = ExtResource("2_65vgq")
+ability = 2
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_7oy0d")
-
-[node name="MapRigidBody" parent="." index="4"]
-collision_mask = 160

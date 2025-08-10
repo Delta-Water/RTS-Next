@@ -3,6 +3,35 @@ extends RigidBody2D
 
 enum State { IDLE, ROTATING, SLIDING }
 
+enum Ability {
+	Land = 0b0001,
+	Water = 0b0010,
+	Cliff = 0b0100,
+	Air = 0b0111,
+}
+
+@export_flags("Land", "Water", "Cliff", "Air") var ability: int = Ability.Land :
+	set(val):
+		var out_collision_mask: int = 0b1111_0000
+		if (val & Ability.Land) != 0:
+			out_collision_mask ^= 0b0010_0000
+			if (val & Ability.Cliff) != 0:
+				out_collision_mask ^= 0b1000_0000
+		if (val & Ability.Water) != 0:
+			out_collision_mask ^= 0b0001_0000
+		ability = val
+		
+		if !is_node_ready():
+			return
+		var maps := get_tree().get_nodes_in_group("maps")[0] as Maps
+		if !maps:
+			push_error("Got a map having incorrect type")
+			return 
+		if map_rigid_body:
+			map_rigid_body.collision_mask = out_collision_mask
+		if navigation_agent_2d:
+			navigation_agent_2d.set_navigation_map(maps.request_navigation_layer_for_mask(out_collision_mask))
+
 # 移动属性
 @export var acceleration: float = 100.0
 @export var deceleration: float = 100.0
@@ -44,6 +73,7 @@ var _delta: float
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+@onready var map_rigid_body: RigidBody2D = $MapRigidBody
 
 func _ready() -> void:
 	# 在设置静态障碍之前不要启用
@@ -52,6 +82,7 @@ func _ready() -> void:
 	# 再次调用set函数保证子节点属性被正确赋值
 	radius = radius
 	display_radius = display_radius
+	ability = ability
 # 更新障碍物状态
 
 func _on_velocity_computed(safe_velocity: Vector2):

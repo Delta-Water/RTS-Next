@@ -5,6 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ecdi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4gqyl"]
+radius = 9.0
 
 [node name="UnitBase1" type="RigidBody2D"]
 collision_layer = 2147483649
@@ -30,7 +31,7 @@ path_max_distance = 10.0
 path_metadata_flags = 2
 simplify_path = true
 simplify_epsilon = 6.0
-avoidance_enabled = true
+radius = 8.0
 max_speed = 50.0
 avoidance_priority = 0.5
 debug_enabled = true

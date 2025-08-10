@@ -9,6 +9,7 @@ radius = 40.0
 
 [node name="HeavyMissileShip" instance=ExtResource("1_i3okn")]
 script = ExtResource("2_kcmma")
+ability = 2
 max_speed = 20
 can_move_while_rotating = false
 radius = 40.0
@@ -22,6 +23,3 @@ texture = ExtResource("2_dlo2f")
 
 [node name="NavigationAgent2D" parent="." index="2"]
 avoidance_priority = 1.0
-
-[node name="MapRigidBody" parent="." index="4"]
-collision_mask = 160

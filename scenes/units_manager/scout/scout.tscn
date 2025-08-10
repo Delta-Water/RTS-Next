@@ -8,15 +8,10 @@
 
 [node name="Scout" instance=ExtResource("1_6m0yk")]
 script = ExtResource("2_lgv01")
+ability = 3
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_tk7km")
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_hl5wb")
-
-[node name="NavigationAgent2D" parent="." index="2"]
-navigation_layers = 7
-
-[node name="MapRigidBody" parent="." index="4"]
-collision_mask = 144

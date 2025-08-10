@@ -9,6 +9,7 @@ radius = 20.0
 
 [node name="CombatEngineer" instance=ExtResource("1_bxk6l")]
 script = ExtResource("2_x2l3i")
+ability = 3
 radius = 20.0
 display_radius = 20.0
 
@@ -17,9 +18,3 @@ shape = SubResource("CircleShape2D_7vdqw")
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_heby1")
-
-[node name="NavigationAgent2D" parent="." index="2"]
-navigation_layers = 7
-
-[node name="MapRigidBody" parent="." index="4"]
-collision_mask = 128
